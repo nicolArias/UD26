@@ -1,11 +1,17 @@
 package com.ejercicio.p4.dto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="Equipos")
@@ -20,8 +26,12 @@ public class Equipo {
 	private String nombre;
 	
 	@ManyToOne
-	@JoinColumn(name="facultad_fk")
+	@JoinColumn(name="facultadFk")
 	private Facultad facultad_fk;
+	
+	@OneToMany
+	@JoinColumn(name = "numSerie")
+	private List<Reserva> reserva;
 	
 	//Constructores
 	public Equipo() {}
@@ -38,6 +48,15 @@ public class Equipo {
 	 */
 	public String getNumSerie() {
 		return numSerie;
+	}
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Reserva")
+	public List<Reserva> getReserva() {
+		return reserva;
+	}
+
+	public void setReserva(List<Reserva> reserva) {
+		this.reserva = reserva;
 	}
 
 	/**

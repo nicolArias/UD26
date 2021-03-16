@@ -13,7 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="Reserva")
+@Table(name="Reservas")
 public class Reserva {
 	
 	//Atributos

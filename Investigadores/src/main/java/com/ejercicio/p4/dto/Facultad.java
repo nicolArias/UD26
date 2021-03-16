@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="Facultades")
@@ -71,6 +74,8 @@ public class Facultad {
 	/**
 	 * @return the investigador
 	 */
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Investigador")
 	public List<Investigador> getInvestigador() {
 		return investigador;
 	}
@@ -85,6 +90,8 @@ public class Facultad {
 	/**
 	 * @return the equipo
 	 */
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Equipo")
 	public List<Equipo> getEquipo() {
 		return equipo;
 	}
